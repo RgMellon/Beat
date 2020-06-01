@@ -3,7 +3,8 @@ import { ActivityIndicator, View } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import AppRoutes from './appTab.routes';
-import Playlist from '../pages/Playlist';
+import DetailPlaylist from '../pages/DetailPlaylist';
+
 const Stack = createStackNavigator();
 
 function routes() {
@@ -18,6 +19,7 @@ function routes() {
       }}
     >
       <Stack.Screen name="Home" component={AppRoutes} />
+      <Stack.Screen name="DetailPlaylist" component={DetailPlaylist} />
     </Stack.Navigator>
   );
 }

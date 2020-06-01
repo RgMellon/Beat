@@ -14,3 +14,7 @@
 [ ] ** MAIN FUNCION ** A principal função do aplicativo é listar as 10 músicas menos tocadas de um artista específico que o usuário procura
 
 - a atribuição regular não exige que você obtenha autenticação OAuth, mas isso é um extra e conta alguns pontos, como ter um bom design
+
+get a playlist
+
+https://developer.spotify.com/console/get-playlist/?playlist_id=37i9dQZF1DX7F6B5noG69s&market=&fields=

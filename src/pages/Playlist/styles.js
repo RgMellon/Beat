@@ -6,17 +6,19 @@ export const Container = styled.View`
   padding: 20px;
 `;
 
-export const PlaylistItem = styled.View`
+export const PlaylistItem = styled.TouchableOpacity`
   width: 100%;
   height: 100px;
   background: #6b6970;
   margin-top: 20px;
   flex-direction: row;
+  align-items: center;
   padding: 5px 20px;
 `;
 
 export const ImagePlaylist = styled.Image`
   width: 80px;
+  height: 80px;
   border-radius: 4px;
 `;
 
@@ -55,4 +57,9 @@ export const Hr = styled.View`
   height: 2px;
   background: #ff9000;
   margin-left: 5px;
+`;
+
+export const FlatPlaylist = styled.FlatList`
+  margin-bottom: 80px;
+  /* padding-bottom: 200px; */
 `;
