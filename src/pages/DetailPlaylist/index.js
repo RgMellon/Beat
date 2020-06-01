@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+// import TrackPlayer from 'react-native-track-player';
+
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
@@ -46,6 +48,21 @@ const DetailPlaylist = ({ route }) => {
     getPlaylistDetail();
   }, [id]);
 
+  function handlePlay(url) {
+    // console.log(url);
+    // TrackPlayer.setupPlayer().then(async () => {
+    //   // Adds a track to the queue
+    //   await TrackPlayer.add({
+    //     id: 'trackId',
+    //     url: url,
+    //     title: 'Track Title',
+    //     artist: 'Track Artist',
+    //   });
+    //   // Starts playing it
+    //   TrackPlayer.play();
+    // });
+  }
+
   function handeGoBack() {
     navigation.goBack();
   }
@@ -90,7 +107,11 @@ const DetailPlaylist = ({ route }) => {
           data={detailPlaylist.tracks.items}
           keyExtractor={item => item.track.id}
           renderItem={({ item }) => (
-            <Music>
+            <Music
+              onPress={() => {
+                handlePlay(item.track.preview_url);
+              }}
+            >
               <WrapperImage>
                 <ImageTrack source={{ uri: item.track.album.images[0].url }} />
 

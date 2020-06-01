@@ -66,7 +66,7 @@ export const Content = styled.View`
   padding: 20px;
 `;
 
-export const Music = styled.View`
+export const Music = styled.TouchableOpacity`
   width: 100%;
   height: 100px;
   margin-top: 20px;
