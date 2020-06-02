@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import TrackPlayer from 'react-native-track-player';
-
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
 import { View, ActivityIndicator } from 'react-native';
 
 import api from '../../services/axios';
+
+import Music from '../../components/Music';
 
 import {
   Container,
@@ -21,12 +21,6 @@ import {
   BackButton,
   Content,
   ListMusic,
-  Music,
-  ImageTrack,
-  ContentMusic,
-  MusicDuration,
-  MusicName,
-  WrapperImage,
 } from './styles';
 
 const DetailPlaylist = ({ route }) => {
@@ -47,30 +41,6 @@ const DetailPlaylist = ({ route }) => {
 
     getPlaylistDetail();
   }, [id]);
-
-  function handlePlay(track) {
-    // const { id, url, title, artist, artwork } = track;
-    console.log(
-      track.id,
-      track.preview_url,
-      track.name,
-      track.artists[0].name,
-      track.album.images[0].url,
-    );
-
-    TrackPlayer.setupPlayer().then(async () => {
-      // Adds a track to the queue
-      await TrackPlayer.add({
-        id: track.id,
-        url: track.preview_url,
-        title: track.name,
-        artist: track.artists[0].name,
-        artwork: track.album.images[0].url,
-      });
-      // Starts playing it
-      TrackPlayer.play();
-    });
-  }
 
   function handeGoBack() {
     navigation.goBack();
@@ -115,42 +85,14 @@ const DetailPlaylist = ({ route }) => {
         <ListMusic
           data={detailPlaylist.tracks.items}
           keyExtractor={item => item.track.id}
-          renderItem={({ item }) => {
-            return (
-              !!item.track.preview_url && (
-                <Music
-                  onPress={() => {
-                    handlePlay(item.track);
-                  }}
-                >
-                  <WrapperImage>
-                    <ImageTrack
-                      source={{ uri: item.track.album.images[0].url }}
-                    />
-
-                    <Icon
-                      size={35}
-                      name="play"
-                      color="#fff"
-                      style={{
-                        position: 'absolute',
-                        top: '10%',
-                        left: '20%',
-                      }}
-                    />
-                  </WrapperImage>
-
-                  <ContentMusic>
-                    <MusicName numberOfLines={1}> {item.track.name} </MusicName>
-
-                    <MusicDuration>
-                      Duration : {item.track.duration_ms}
-                    </MusicDuration>
-                  </ContentMusic>
-                </Music>
-              )
-            );
-          }}
+          renderItem={({ item }) => (
+            <Music
+              track={item.track}
+              // image={item.track.album.images[0].url}
+              // name={item.track.name}
+              // duration={item.track.duration_ms}
+            />
+          )}
         />
       </Content>
     </Container>
