@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import BottomPlayerMusic from '../../components/BottomPlayerMusic';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
@@ -90,6 +90,7 @@ const DetailPlaylist = ({ route }) => {
           }}
         />
       </Content>
+      <BottomPlayerMusic />
     </Container>
   );
 };

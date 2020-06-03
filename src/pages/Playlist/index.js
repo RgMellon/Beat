@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { SafeAreaView } from 'react-native';
 
+import BottomPlayerMusic from '../../components/BottomPlayerMusic';
+
 import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -66,6 +68,7 @@ function Playlist() {
           )}
         />
       </SafeAreaView>
+      <BottomPlayerMusic />
     </Container>
   );
 }

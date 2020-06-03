@@ -1,19 +1,13 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
+
+import { usePlay } from '../../hooks/player';
 
 import Icon from 'react-native-vector-icons/Feather';
+
 import TrackPlayer, {
   useTrackPlayerEvents,
   TrackPlayerEvents,
-  STATE_PLAYING,
 } from 'react-native-track-player';
-
-const events = [
-  TrackPlayerEvents.PLAYBACK_STATE,
-  TrackPlayerEvents.PLAYBACK_ERROR,
-  TrackPlayerEvents.REMOTE_PAUSE,
-  TrackPlayerEvents.REMOTE_STOP,
-];
-// import playerHandler from '../../../player-handler';
 
 import {
   Container,
@@ -24,25 +18,39 @@ import {
   MusicName,
 } from './styles';
 
+const events = [
+  TrackPlayerEvents.PLAYBACK_STATE,
+  TrackPlayerEvents.PLAYBACK_ERROR,
+  TrackPlayerEvents.REMOTE_PAUSE,
+  TrackPlayerEvents.REMOTE_STOP,
+];
+
 function Music({ track }) {
   const [isPlay, setIsplay] = useState(false);
+
+  const { setMusic, playingMusic } = usePlay();
 
   useTrackPlayerEvents(events, async event => {
     const currentTrackPlay = await TrackPlayer.getCurrentTrack();
 
     if (event.state === 2 && currentTrackPlay === track.id) {
       setIsplay(false);
+      playingMusic(false);
       return;
     }
 
     if (event.state === 3 && currentTrackPlay === track.id) {
       setIsplay(true);
+      playingMusic(true);
       return;
     }
   });
 
   async function handlePlay() {
-    await TrackPlayer.setupPlayer().then(async () => {
+    await TrackPlayer.setupPlayer({
+      playBuffer: 5,
+      minBuffer: 10,
+    }).then(async () => {
       TrackPlayer.updateOptions({
         capabilities: [
           TrackPlayer.CAPABILITY_PLAY,
@@ -55,13 +63,18 @@ function Music({ track }) {
         stopWithApp: true,
       });
 
-      await TrackPlayer.add({
+      const music = {
         id: track.id,
         url: track.preview_url,
         title: track.name,
         artist: track.artists[0].name,
         artwork: track.album.images[0].url,
-      });
+      };
+
+      setMusic(music);
+      playingMusic(true);
+
+      await TrackPlayer.add(music);
 
       await TrackPlayer.play();
     });
@@ -69,6 +82,7 @@ function Music({ track }) {
 
   async function handleStop() {
     await TrackPlayer.pause();
+    playingMusic(false);
   }
 
   return (
