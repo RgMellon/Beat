@@ -1,7 +1,7 @@
 import TrackPlayer from 'react-native-track-player';
 
-module.exports = async data => {
-  console.log('dataaaaa', data);
+export default async data => {
+  // console.log('dataaaaa', data);
 
   if (data.type === 'playback-state') {
     // Update the UI with the new state

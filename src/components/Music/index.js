@@ -1,7 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 import Icon from 'react-native-vector-icons/Feather';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {
+  useTrackPlayerEvents,
+  TrackPlayerEvents,
+  STATE_PLAYING,
+} from 'react-native-track-player';
+
+const events = [
+  TrackPlayerEvents.PLAYBACK_STATE,
+  TrackPlayerEvents.PLAYBACK_ERROR,
+  TrackPlayerEvents.REMOTE_PAUSE,
+  TrackPlayerEvents.REMOTE_STOP,
+];
+// import playerHandler from '../../../player-handler';
 
 import {
   Container,
@@ -15,9 +27,34 @@ import {
 function Music({ track }) {
   const [isPlay, setIsplay] = useState(false);
 
+  useTrackPlayerEvents(events, async event => {
+    const currentTrackPlay = await TrackPlayer.getCurrentTrack();
+
+    if (event.state === 2 && currentTrackPlay === track.id) {
+      setIsplay(false);
+      return;
+    }
+
+    if (event.state === 3 && currentTrackPlay === track.id) {
+      setIsplay(true);
+      return;
+    }
+  });
+
   async function handlePlay() {
     await TrackPlayer.setupPlayer().then(async () => {
-      // Adds a track to the queue
+      TrackPlayer.updateOptions({
+        capabilities: [
+          TrackPlayer.CAPABILITY_PLAY,
+          TrackPlayer.CAPABILITY_PAUSE,
+        ],
+        compactCapabilities: [
+          TrackPlayer.CAPABILITY_PLAY,
+          TrackPlayer.CAPABILITY_PAUSE,
+        ],
+        stopWithApp: true,
+      });
+
       await TrackPlayer.add({
         id: track.id,
         url: track.preview_url,
@@ -28,32 +65,28 @@ function Music({ track }) {
 
       await TrackPlayer.play();
     });
-
-    // setIsplay(!isPlay);
   }
 
-  // async function handleStop() {
-  //   setIsplay(!isPlay);
-  //   await TrackPlayer.pause();
-  // }
+  async function handleStop() {
+    await TrackPlayer.pause();
+  }
 
   return (
-    <Container onPress={handlePlay}>
+    <Container onPress={!isPlay ? handlePlay : handleStop}>
       <WrapperImage>
         <ImageTrack source={{ uri: track.album.images[0].url }} />
-
-        {/* {!isPlay ? ( */}
-        <Icon
-          size={35}
-          name="play"
-          color="#fff"
-          style={{
-            position: 'absolute',
-            top: '10%',
-            left: '20%',
-          }}
-        />
-        {/* ) : (
+        {!isPlay ? (
+          <Icon
+            size={35}
+            name="play"
+            color="#fff"
+            style={{
+              position: 'absolute',
+              top: '10%',
+              left: '20%',
+            }}
+          />
+        ) : (
           <Icon
             size={35}
             name="pause"
@@ -64,7 +97,7 @@ function Music({ track }) {
               left: '20%',
             }}
           />
-        )} */}
+        )}
       </WrapperImage>
 
       <ContentMusic>
