@@ -55,43 +55,45 @@ const DetailPlaylist = ({ route }) => {
   }
 
   return (
-    <Container>
-      <Header>
-        <BackButton onPress={handeGoBack}>
-          <Icon size={20} name="chevron-left" color="#666" />
-        </BackButton>
-        <ImageAlbum
-          resizeMode="cover"
-          source={{
-            uri: detailPlaylist.images[0].url,
-          }}
-        />
-        <ContentHeader>
-          <Title> {} </Title>
-          <ContentInfo>
-            <TitleInfo> Artist </TitleInfo>
-            <DescriptionInfo> {detailPlaylist.name} </DescriptionInfo>
-          </ContentInfo>
+    <>
+      <Container>
+        <Header>
+          <BackButton onPress={handeGoBack}>
+            <Icon size={20} name="chevron-left" color="#666" />
+          </BackButton>
+          <ImageAlbum
+            resizeMode="cover"
+            source={{
+              uri: detailPlaylist.images[0].url,
+            }}
+          />
+          <ContentHeader>
+            <Title> {} </Title>
+            <ContentInfo>
+              <TitleInfo> Artist </TitleInfo>
+              <DescriptionInfo> {detailPlaylist.name} </DescriptionInfo>
+            </ContentInfo>
 
-          <ContentInfo>
-            <TitleInfo> Duration </TitleInfo>
-            <DescriptionInfo> 80min </DescriptionInfo>
-          </ContentInfo>
-        </ContentHeader>
-      </Header>
+            <ContentInfo>
+              <TitleInfo> Duration </TitleInfo>
+              <DescriptionInfo> 80min </DescriptionInfo>
+            </ContentInfo>
+          </ContentHeader>
+        </Header>
 
-      <Content>
-        <Title> Musics </Title>
-        <ListMusic
-          data={detailPlaylist.tracks.items}
-          keyExtractor={item => item.track.id}
-          renderItem={({ item }) => {
-            return !!item.track.preview_url && <Music track={item.track} />;
-          }}
-        />
-      </Content>
+        <Content>
+          <Title> Musics </Title>
+          <ListMusic
+            data={detailPlaylist.tracks.items}
+            keyExtractor={item => item.track.id}
+            renderItem={({ item }) => {
+              return !!item.track.preview_url && <Music track={item.track} />;
+            }}
+          />
+        </Content>
+      </Container>
       <BottomPlayerMusic />
-    </Container>
+    </>
   );
 };
 

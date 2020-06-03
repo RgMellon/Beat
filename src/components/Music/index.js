@@ -26,70 +26,48 @@ const events = [
 ];
 
 function Music({ track }) {
-  const [isPlay, setIsplay] = useState(false);
+  const { play, stop } = usePlay();
 
-  const { setMusic, playingMusic } = usePlay();
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useTrackPlayerEvents(events, async event => {
     const currentTrackPlay = await TrackPlayer.getCurrentTrack();
 
     if (event.state === 2 && currentTrackPlay === track.id) {
-      setIsplay(false);
-      playingMusic(false);
+      setIsPlaying(false);
+      console.log('pausado');
       return;
     }
 
     if (event.state === 3 && currentTrackPlay === track.id) {
-      setIsplay(true);
-      playingMusic(true);
+      // setCurrentMusic(true);
+      setIsPlaying(true);
+      console.log('tocando');
       return;
     }
   });
 
   async function handlePlay() {
-    await TrackPlayer.setupPlayer({
-      playBuffer: 5,
-      minBuffer: 10,
-    }).then(async () => {
-      TrackPlayer.updateOptions({
-        capabilities: [
-          TrackPlayer.CAPABILITY_PLAY,
-          TrackPlayer.CAPABILITY_PAUSE,
-        ],
-        compactCapabilities: [
-          TrackPlayer.CAPABILITY_PLAY,
-          TrackPlayer.CAPABILITY_PAUSE,
-        ],
-        stopWithApp: true,
-      });
+    const music = {
+      id: track.id,
+      url: track.preview_url,
+      title: track.name,
+      artist: track.artists[0].name,
+      artwork: track.album.images[0].url,
+    };
 
-      const music = {
-        id: track.id,
-        url: track.preview_url,
-        title: track.name,
-        artist: track.artists[0].name,
-        artwork: track.album.images[0].url,
-      };
-
-      setMusic(music);
-      playingMusic(true);
-
-      await TrackPlayer.add(music);
-
-      await TrackPlayer.play();
-    });
+    play(music);
   }
 
   async function handleStop() {
-    await TrackPlayer.pause();
-    playingMusic(false);
+    stop();
   }
 
   return (
-    <Container onPress={!isPlay ? handlePlay : handleStop}>
+    <Container onPress={!isPlaying ? handlePlay : handleStop}>
       <WrapperImage>
         <ImageTrack source={{ uri: track.album.images[0].url }} />
-        {!isPlay ? (
+        {!isPlaying ? (
           <Icon
             size={35}
             name="play"

@@ -9,33 +9,36 @@ import { View, Text } from 'react-native';
 import { Container, ButtonControllerMusic, TitleMusic } from './styles';
 
 const BottomPlayerMusic = () => {
-  const { selectedMusic, isPlaying } = usePlay();
+  const { currentMusic } = usePlay();
   const { position, bufferedPosition, duration } = useTrackPlayerProgress();
 
   return (
-    <Container>
-      <ButtonControllerMusic>
-        {!isPlaying ? (
-          <Icon size={30} name="play-circle" color="#fff" />
-        ) : (
+    currentMusic && (
+      <Container>
+        <ButtonControllerMusic>
           <Icon size={30} name="pause-circle" color="#fff" />
-        )}
-      </ButtonControllerMusic>
+          {/* {!isPlaying ? (
+            <Icon size={30} name="play-circle" color="#fff" />
+          ) : (
 
-      {/* <View>
-        <Text>
-          Track progress: {position} seconds out of {duration} total
-        </Text>
-        <Text>
-          Buffered progress: {bufferedPosition} seconds buffered out of{' '}
-          {duration} total
-        </Text>
-      </View> */}
+          )} */}
+        </ButtonControllerMusic>
 
-      <TitleMusic>
-        {duration} / {position}
-      </TitleMusic>
-    </Container>
+        {/* <View>
+          <Text>
+            Track progress: {position} seconds out of {duration} total
+          </Text>
+          <Text>
+            Buffered progress: {bufferedPosition} seconds buffered out of{' '}
+            {duration} total
+          </Text>
+        </View> */}
+
+        <TitleMusic>
+          {duration} / {position}
+        </TitleMusic>
+      </Container>
+    )
   );
 };
 
