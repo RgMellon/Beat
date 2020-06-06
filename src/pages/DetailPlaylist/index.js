@@ -92,7 +92,7 @@ const DetailPlaylist = ({ route }) => {
           />
         </Content>
       </Container>
-      <BottomPlayerMusic />
+      {/* <BottomPlayerMusic /> */}
     </>
   );
 };

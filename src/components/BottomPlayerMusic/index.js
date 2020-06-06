@@ -1,42 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { usePlay } from '../../hooks/player';
-import { useTrackPlayerProgress } from 'react-native-track-player';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import { View, Text } from 'react-native';
+import CircleLoad from '../../components/Progess';
 
-import { Container, ButtonControllerMusic, TitleMusic } from './styles';
+import {
+  Container,
+  ButtonControllerMusic,
+  TitleMusic,
+  ControllerPlayerButton,
+} from './styles';
 
 const BottomPlayerMusic = () => {
-  const { currentMusic } = usePlay();
-  const { position, bufferedPosition, duration } = useTrackPlayerProgress();
+  const { currentMusic, musicState, play, stop } = usePlay();
+
+  function handlePlay() {
+    play(currentMusic);
+  }
 
   return (
-    currentMusic && (
+    !!currentMusic.title && (
       <Container>
         <ButtonControllerMusic>
-          <Icon size={30} name="pause-circle" color="#fff" />
-          {/* {!isPlaying ? (
-            <Icon size={30} name="play-circle" color="#fff" />
-          ) : (
+          {musicState === 'playing' && <CircleLoad />}
 
-          )} */}
+          {musicState === 'finish' || musicState === 'pause' ? (
+            <ControllerPlayerButton onPress={handlePlay}>
+              <Icon size={30} name="play-circle" color="#fff" />
+            </ControllerPlayerButton>
+          ) : (
+            <ControllerPlayerButton onPress={stop}>
+              <Icon size={30} name="pause-circle" color="#fff" />
+            </ControllerPlayerButton>
+          )}
         </ButtonControllerMusic>
 
-        {/* <View>
-          <Text>
-            Track progress: {position} seconds out of {duration} total
-          </Text>
-          <Text>
-            Buffered progress: {bufferedPosition} seconds buffered out of{' '}
-            {duration} total
-          </Text>
-        </View> */}
-
-        <TitleMusic>
-          {duration} / {position}
-        </TitleMusic>
+        <TitleMusic>{currentMusic.title}</TitleMusic>
       </Container>
     )
   );

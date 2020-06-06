@@ -18,6 +18,8 @@ export const Container = styled.View`
 
 export const ButtonControllerMusic = styled.TouchableOpacity`
   width: 30px;
+  flex-direction: row;
+  position: relative;
 `;
 
 export const TitleMusic = styled.Text`
@@ -26,3 +28,5 @@ export const TitleMusic = styled.Text`
   font-weight: 200;
   margin-left: 20px;
 `;
+
+export const ControllerPlayerButton = styled.TouchableOpacity``;

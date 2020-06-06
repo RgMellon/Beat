@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 
 import { usePlay } from '../../hooks/player';
 
@@ -21,33 +21,52 @@ import {
 const events = [
   TrackPlayerEvents.PLAYBACK_STATE,
   TrackPlayerEvents.PLAYBACK_ERROR,
-  TrackPlayerEvents.REMOTE_PAUSE,
-  TrackPlayerEvents.REMOTE_STOP,
+  // TrackPlayerEvents.REMOTE_PAUSE,
+  // TrackPlayerEvents.REMOTE_STOP,
 ];
 
 function Music({ track }) {
-  const { play, stop } = usePlay();
+  // useEffect(() => {
+  //   console.log('rendeer');
+  // }, []);
+  console.log('render');
+
+  const { play, stop, setStateMusic } = usePlay();
 
   const [isPlaying, setIsPlaying] = useState(false);
 
   useTrackPlayerEvents(events, async event => {
+    console.log(event);
     const currentTrackPlay = await TrackPlayer.getCurrentTrack();
+
+    if (event.state === 0) {
+      setIsPlaying(false);
+      return;
+    }
+
+    if (event.state === 1 && currentTrackPlay === track.id) {
+      setIsPlaying(false);
+      setStateMusic('finish');
+      return;
+    }
 
     if (event.state === 2 && currentTrackPlay === track.id) {
       setIsPlaying(false);
-      console.log('pausado');
+      setStateMusic('pause');
+
       return;
     }
 
     if (event.state === 3 && currentTrackPlay === track.id) {
       // setCurrentMusic(true);
       setIsPlaying(true);
-      console.log('tocando');
+      setStateMusic('playing');
+
       return;
     }
   });
 
-  async function handlePlay() {
+  const handlePlay = useCallback(() => {
     const music = {
       id: track.id,
       url: track.preview_url,
@@ -57,11 +76,11 @@ function Music({ track }) {
     };
 
     play(music);
-  }
+  });
 
-  async function handleStop() {
+  const handleStop = useCallback(() => {
     stop();
-  }
+  });
 
   return (
     <Container onPress={!isPlaying ? handlePlay : handleStop}>

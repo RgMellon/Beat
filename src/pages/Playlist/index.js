@@ -18,6 +18,7 @@ import {
   Hr,
   FlatPlaylist,
 } from './styles';
+
 import api from '../../services/axios';
 
 function Playlist() {
@@ -68,7 +69,7 @@ function Playlist() {
           )}
         />
       </SafeAreaView>
-      <BottomPlayerMusic />
+      {/* <BottomPlayerMusic /> */}
     </Container>
   );
 }

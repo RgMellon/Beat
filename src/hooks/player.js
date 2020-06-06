@@ -11,36 +11,32 @@ import TrackPlayer from 'react-native-track-player';
 const PlayContext = createContext();
 
 export const PlayerProvider = ({ children }) => {
-  const [selectedMusic, setSelectedMusic] = useState({});
-  const [currentMusic, setCurrentMusic] = useState(false);
-
-  const setMusic = useCallback(async music => {
-    setSelectedMusic(music);
-  }, []);
+  // const [selectedMusic, setSelectedMusic] = useState({});
+  const [currentMusic, setCurrentMusic] = useState({});
+  const [musicState, setMusicState] = useState('');
 
   const play = useCallback(
     async music => {
       await TrackPlayer.setupPlayer({
-        playBuffer: 5,
-        minBuffer: 10,
-      }).then(async () => {
-        TrackPlayer.updateOptions({
-          capabilities: [
-            TrackPlayer.CAPABILITY_PLAY,
-            TrackPlayer.CAPABILITY_PAUSE,
-          ],
-          compactCapabilities: [
-            TrackPlayer.CAPABILITY_PLAY,
-            TrackPlayer.CAPABILITY_PAUSE,
-          ],
-          stopWithApp: true,
-        });
-
-        await TrackPlayer.add(music);
-
-        await TrackPlayer.play();
-        setCurrentMusic(true);
+        // playBuffer: 5,
+        // minBuffer: 10,
       });
+
+      TrackPlayer.updateOptions({
+        capabilities: [
+          TrackPlayer.CAPABILITY_PLAY,
+          TrackPlayer.CAPABILITY_PAUSE,
+        ],
+        compactCapabilities: [
+          TrackPlayer.CAPABILITY_PLAY,
+          TrackPlayer.CAPABILITY_PAUSE,
+        ],
+        stopWithApp: true,
+      });
+
+      await TrackPlayer.add(music);
+      setCurrentMusic(music);
+      await TrackPlayer.play().then();
     },
 
     [TrackPlayer, setCurrentMusic],
@@ -50,11 +46,15 @@ export const PlayerProvider = ({ children }) => {
     await TrackPlayer.pause();
   }, [TrackPlayer]);
 
+  const setStateMusic = useCallback(state => {
+    setMusicState(state);
+  });
+
   return (
     <PlayContext.Provider
       value={{
-        setMusic,
-        selectedMusic,
+        setStateMusic,
+        musicState,
         currentMusic,
         play,
         stop,
