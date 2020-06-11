@@ -1,13 +1,10 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
 import { usePlay } from '../../hooks/player';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import TrackPlayer, {
-  useTrackPlayerEvents,
-  TrackPlayerEvents,
-} from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 
 import {
   Container,
@@ -18,53 +15,19 @@ import {
   MusicName,
 } from './styles';
 
-const events = [
-  TrackPlayerEvents.PLAYBACK_STATE,
-  TrackPlayerEvents.PLAYBACK_ERROR,
-  // TrackPlayerEvents.REMOTE_PAUSE,
-  // TrackPlayerEvents.REMOTE_STOP,
-];
-
 function Music({ track }) {
-  // useEffect(() => {
-  //   console.log('rendeer');
-  // }, []);
-  console.log('render');
+  const { play, stop, playing } = usePlay();
 
-  const { play, stop, setStateMusic } = usePlay();
+  const [playThisMusic, setPlayThisMusic] = useState(false);
 
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  useTrackPlayerEvents(events, async event => {
-    console.log(event);
+  useMemo(async () => {
     const currentTrackPlay = await TrackPlayer.getCurrentTrack();
-
-    if (event.state === 0) {
-      setIsPlaying(false);
+    if (playing && currentTrackPlay === track.id) {
+      setPlayThisMusic(true);
       return;
     }
-
-    if (event.state === 1 && currentTrackPlay === track.id) {
-      setIsPlaying(false);
-      setStateMusic('finish');
-      return;
-    }
-
-    if (event.state === 2 && currentTrackPlay === track.id) {
-      setIsPlaying(false);
-      setStateMusic('pause');
-
-      return;
-    }
-
-    if (event.state === 3 && currentTrackPlay === track.id) {
-      // setCurrentMusic(true);
-      setIsPlaying(true);
-      setStateMusic('playing');
-
-      return;
-    }
-  });
+    setPlayThisMusic(false);
+  }, [playing, TrackPlayer, setPlayThisMusic]);
 
   const handlePlay = useCallback(() => {
     const music = {
@@ -83,10 +46,10 @@ function Music({ track }) {
   });
 
   return (
-    <Container onPress={!isPlaying ? handlePlay : handleStop}>
+    <Container onPress={!playThisMusic ? handlePlay : handleStop}>
       <WrapperImage>
         <ImageTrack source={{ uri: track.album.images[0].url }} />
-        {!isPlaying ? (
+        {!playThisMusic ? (
           <Icon
             size={35}
             name="play"

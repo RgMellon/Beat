@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { usePlay } from '../../hooks/player';
 
 import Icon from 'react-native-vector-icons/Feather';
@@ -13,7 +13,7 @@ import {
 } from './styles';
 
 const BottomPlayerMusic = () => {
-  const { currentMusic, musicState, play, stop } = usePlay();
+  const { currentMusic, play, stop, playing } = usePlay();
 
   function handlePlay() {
     play(currentMusic);
@@ -23,9 +23,9 @@ const BottomPlayerMusic = () => {
     !!currentMusic.title && (
       <Container>
         <ButtonControllerMusic>
-          {musicState === 'playing' && <CircleLoad />}
+          {playing && <CircleLoad />}
 
-          {musicState === 'finish' || musicState === 'pause' ? (
+          {!playing ? (
             <ControllerPlayerButton onPress={handlePlay}>
               <Icon size={30} name="play-circle" color="#fff" />
             </ControllerPlayerButton>

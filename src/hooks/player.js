@@ -1,26 +1,34 @@
-import React, {
-  createContext,
-  useCallback,
-  useState,
-  useContext,
-  useEffect,
-} from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {
+  useTrackPlayerEvents,
+  TrackPlayerEvents,
+} from 'react-native-track-player';
+
+const events = [
+  TrackPlayerEvents.PLAYBACK_STATE,
+  TrackPlayerEvents.PLAYBACK_ERROR,
+];
 
 const PlayContext = createContext();
 
 export const PlayerProvider = ({ children }) => {
-  // const [selectedMusic, setSelectedMusic] = useState({});
+  const [playing, setPlaying] = useState(false);
   const [currentMusic, setCurrentMusic] = useState({});
-  const [musicState, setMusicState] = useState('');
+
+  useTrackPlayerEvents(events, event => {
+    if (event.state !== 3) {
+      setPlaying(false);
+
+      return;
+    }
+
+    setPlaying(true);
+  });
 
   const play = useCallback(
     async music => {
-      await TrackPlayer.setupPlayer({
-        // playBuffer: 5,
-        // minBuffer: 10,
-      });
+      await TrackPlayer.setupPlayer({});
 
       TrackPlayer.updateOptions({
         capabilities: [
@@ -46,16 +54,11 @@ export const PlayerProvider = ({ children }) => {
     await TrackPlayer.pause();
   }, [TrackPlayer]);
 
-  const setStateMusic = useCallback(state => {
-    setMusicState(state);
-  });
-
   return (
     <PlayContext.Provider
       value={{
-        setStateMusic,
-        musicState,
         currentMusic,
+        playing,
         play,
         stop,
       }}
