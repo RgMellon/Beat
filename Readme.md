@@ -22,3 +22,13 @@ https://developer.spotify.com/console/get-playlist/?playlist_id=37i9dQZF1DX7F6B5
 ## HOW TO GET LESS PLAYED MUSIC
 
 Atualmente, parece que primeiro precisamos obter os álbuns do artista com a API e depois enviar outra solicitação à API para obter as faixas de cada um dos álbuns do artista
+
+Variant: debugAndroidTest
+Config: debug
+Store: /Users/xoblinha/.android/debug.keystore
+Alias: AndroidDebugKey
+MD5: 26:49:E3:FC:13:F7:AB:7B:41:07:4E:CC:E9:A9:BF:6B
+SHA1: DC:DF:87:B1:AC:CC:CC:12:73:69:E9:21:E9:77:B4:86:1F:D2:E2:BF
+DC:DF:87:B1:AC:CC:CC:12:73:69:E9:21:E9:77:B4:86:1F:D2:E2:BF
+SHA-256: 4E:04:05:D3:AF:9C:49:36:59:E5:24:A7:7D:BD:02:7A:15:E6:B2:4D:6A:C2:D1:E1:6B:5D:5C:2D:D9:05:02:3E
+Valid until: Quinta-feira, 2 de Setembro de 2049

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const token =
-  'BQC1qODQZwRIvW3BxV41gSsUUuJD2zjF6QcdmZfBgBsM7aGSp3pzsec4OfGkWqGCD9N0llFEx4dl80bvEvULIuzvvhcou0aPUkUpzPspH3V8ioq4bFz5yCAXdKdcL9JhNmO0ZbsE7mGTd-mfz5h3vi_uiXFmF1taqFUCLGfIJhJpremM6TQl3MJljv6a89hO1lwloXJVBuXO-FBkvSkDdN2rN37H83J859Gbq6mB4dvwHJGI0ULSXGrstxDI5TtiMFKWAbhFIbM8Abi-xg';
+  'BQC37r3IMYMT7ufar6j_h1TgL57gBRQ5v_rKtsFlVPooTxdsyepmM0bDwJsMwD-IjfSOXJ5uoS6AMBiCHoLmZ4k8kfRTnOzLfi17IgNJUSsVfUv19rsRK-A4XcZatoSp8EYixmP_9sei7muJBNKQbEg84Drt04eYwsWuE9_Avo-vqZDyoTgv5XWzi8a1uYRYFle_zZm42hjnpliAlIo4tUAACwnpCNFhBs_TnzBiNsLjiltXrRxoHyyj4lO1lfBcu8DpKWZojVIB_yvL5w';
 
 const api = axios.create({
   baseURL: 'https://api.spotify.com/v1',
