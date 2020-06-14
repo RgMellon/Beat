@@ -20,6 +20,7 @@ export const WrapperSearch = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
   /* margin-top: -20px;
   z-index: 9999999999999; */
 `;
@@ -35,7 +36,7 @@ export const ButtonSearch = styled.TouchableOpacity`
 
 export const ListMusic = styled.FlatList`
   margin-top: 20px;
-  margin-bottom: 130px;
+  margin-bottom: 20px;
   /* background: red; */
 `;
 

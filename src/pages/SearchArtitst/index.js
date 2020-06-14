@@ -64,8 +64,7 @@ export default function SearchArtitst() {
   }, [search]);
 
   return (
-    <ScrollView>
-      {/* {console.log(previewArtist2.items[0].images[0].url)} */}
+    <ScrollView style={{ flex: 1, backgroundColor: '#312e38' }}>
       {previewArtist.items && (
         <PreviewArtist
           resizeMode="cover"
@@ -97,40 +96,38 @@ export default function SearchArtitst() {
       )}
 
       <Container>
-        <SafeAreaView>
-          <WrapperSearch>
-            <SearchInput
-              clearButtonMode="always"
-              blurOnSubmit
-              returnKeyType="search"
-              placeholder="Search an artist"
-              placeholderTextColor="#fff"
-              value={search}
-              onChangeText={setSearch}
-              onSubmitEditing={() => handleSearch()}
+        <WrapperSearch>
+          <SearchInput
+            clearButtonMode="always"
+            blurOnSubmit
+            returnKeyType="search"
+            placeholder="Search an artist"
+            placeholderTextColor="#fff"
+            value={search}
+            onChangeText={setSearch}
+            onSubmitEditing={() => handleSearch()}
+          />
+
+          <ButtonSearch onPress={handleSearch}>
+            {loadSearch ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <Icon size={20} name="search" color="#fff" />
+            )}
+          </ButtonSearch>
+        </WrapperSearch>
+
+        {topTracksArtist.length > 0 && (
+          <>
+            <ListMusic
+              data={topTracksArtist}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => {
+                return <Music track={item} />;
+              }}
             />
-
-            <ButtonSearch onPress={handleSearch}>
-              {loadSearch ? (
-                <ActivityIndicator size="small" color="#fff" />
-              ) : (
-                <Icon size={20} name="search" color="#fff" />
-              )}
-            </ButtonSearch>
-          </WrapperSearch>
-
-          {topTracksArtist.length > 0 && (
-            <>
-              <ListMusic
-                data={topTracksArtist}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => {
-                  return <Music track={item} />;
-                }}
-              />
-            </>
-          )}
-        </SafeAreaView>
+          </>
+        )}
       </Container>
     </ScrollView>
   );
