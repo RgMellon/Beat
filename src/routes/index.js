@@ -1,27 +1,24 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { createStackNavigator } from '@react-navigation/stack';
-import AppRoutes from './appTab.routes';
-import DetailPlaylist from '../pages/DetailPlaylist';
+import AuthRoutes from './auth.routes';
+import AppRoutes from './app.routes';
 
-const Stack = createStackNavigator();
+import { useAuth } from '../hooks/auth';
 
-function routes() {
-  return (
-    <Stack.Navigator
-      headerMode="screen"
-      screenOptions={{
-        headerShown: false,
-        cardStyle: {
-          backgroundColor: '#312e38',
-        },
-      }}
-    >
-      <Stack.Screen name="Home" component={AppRoutes} />
-      <Stack.Screen name="DetailPlaylist" component={DetailPlaylist} />
-    </Stack.Navigator>
-  );
-}
+const Routes = () => {
+  const { data, load } = useAuth();
+  // const { user, load } = useAuth();
 
-export default routes;
+  if (load) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#999" />
+      </View>
+    );
+  }
+
+  return data ? <AppRoutes /> : <AuthRoutes />;
+};
+
+export default Routes;
