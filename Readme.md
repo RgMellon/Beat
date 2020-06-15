@@ -16,6 +16,22 @@ o Projet **Beat** partiu de uma iniciativa ao ver o desafio criado pelo pessoal 
 
 ---
 
+## Preview do projeto
+
+segue alguns prints do projeto
+
+<div>
+  <img style="margin: 5px" alt="login" src="https://i.imgur.com/5uGUpXZ.jpg" width="200">
+
+  <img style="margin: 5px" alt="playlist" src="https://i.imgur.com/tJoZwHt.jpg" width="200">
+
+  <img style="margin: 5px" alt="detail" src="https://i.imgur.com/jcAYsBf.jpg" width="200">
+
+  <img style="margin: 5px" alt="artist" src="https://i.imgur.com/B4PRp2C.jpg" width="200">
+</div>
+
+---
+
 ## 💻 Tecnologias utilizadas
 
 O projeto foi feito utilizando das seguines tecnologias
