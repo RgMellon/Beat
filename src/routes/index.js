@@ -10,13 +10,13 @@ const Routes = () => {
   const { data, load } = useAuth();
   // const { user, load } = useAuth();
 
-  if (load) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#999" />
-      </View>
-    );
-  }
+  // if (load) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  //       <ActivityIndicator size="large" color="#999" />
+  //     </View>
+  //   );
+  // }
 
   return data ? <AppRoutes /> : <AuthRoutes />;
 };

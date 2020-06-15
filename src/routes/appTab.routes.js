@@ -35,7 +35,7 @@ function AppRoutes() {
         name="SearchArtist"
         component={SearchArtist}
         options={{
-          tabBarLabel: 'Buscar',
+          tabBarLabel: 'Search',
           tabBarIcon: ({ color }) => (
             <Icon name="search" color={color} size={14} />
           ),
