@@ -8,6 +8,7 @@
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Como baixar o projeto](#-como-baixar-o-projeto)
 - [Preview do projeto](#-preview-do-projeto)
+- [Download apk](#-download-do-apk)
 
 ---
 
@@ -17,7 +18,7 @@ o Projet **Beat** partiu de uma iniciativa ao ver o desafio criado pelo pessoal 
 
 ---
 
-## Preview do projeto
+## 📱 Preview do projeto
 
 segue alguns prints do projeto
 
@@ -63,5 +64,9 @@ O projeto foi feito utilizando das seguines tecnologias
 ```
 
 ---
+
+## 🤳 Download do apk
+
+> [Download APK](https://drive.google.com/file/d/1uFin5Hu7VT8I6IHzTwDE5FigoXAM7W4V/view?usp=sharing)
 
 Desenvolvido com ♥ por Renan Melo
