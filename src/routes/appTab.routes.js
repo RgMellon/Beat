@@ -6,8 +6,9 @@ import SearchArtist from '../pages/SearchArtitst';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const AppTab = createBottomTabNavigator();
+const AppTab = createMaterialTopTabNavigator();
 
 function AppRoutes() {
   return (
@@ -16,8 +17,12 @@ function AppRoutes() {
       tabBarOptions={{
         activeTintColor: '#ff9000',
         inactiveTintColor: '#d0d0d0',
+        indicatorStyle: { backgroundColor: '#999' },
+        pressColor: '#ff9000',
         style: {
           backgroundColor: '#3E3B46',
+          height: 60,
+          justifyContent: 'center',
         },
       }}
     >

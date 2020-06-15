@@ -8,8 +8,7 @@ export const Container = styled.View`
 
   position: absolute;
   bottom: 0px;
-  right: 0;
-  left: 0;
+
   /* justify-content: center; */
   z-index: 9999;
   flex-direction: row;

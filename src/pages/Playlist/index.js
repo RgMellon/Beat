@@ -40,10 +40,10 @@ function Playlist() {
   return (
     <Container>
       <SafeAreaView>
-        <Header>
+        {/* <Header>
           <HeaderTitle> Playlists </HeaderTitle>
           <Hr />
-        </Header>
+        </Header> */}
 
         <FlatPlaylist
           data={myPlaylist}
@@ -69,6 +69,7 @@ function Playlist() {
           )}
         />
       </SafeAreaView>
+
       {/* <BottomPlayerMusic /> */}
     </Container>
   );

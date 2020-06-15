@@ -4,6 +4,7 @@ export const Container = styled.View`
   flex: 1;
   background: #312e38;
   padding: 20px;
+  position: relative;
 `;
 
 export const PlaylistItem = styled.TouchableOpacity`
@@ -60,6 +61,6 @@ export const Hr = styled.View`
 `;
 
 export const FlatPlaylist = styled.FlatList`
-  margin-bottom: 80px;
+  /* margin-bottom: 20px; */
   /* padding-bottom: 200px; */
 `;

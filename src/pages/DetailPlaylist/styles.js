@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.ScrollView``;
+export const Container = styled.ScrollView`
+  position: relative;
+`;
 
 export const Header = styled.View`
   position: relative;
