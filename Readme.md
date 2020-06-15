@@ -7,6 +7,7 @@
 - [Sobre](#-sobre)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Como baixar o projeto](#-como-baixar-o-projeto)
+- [Preview do projeto](#-preview-do-projeto)
 
 ---
 
@@ -41,6 +42,7 @@ O projeto foi feito utilizando das seguines tecnologias
 - Styled-Components
 - react-native-app-auth
 - Context api
+- React-native-track-player
 
 ---
 
