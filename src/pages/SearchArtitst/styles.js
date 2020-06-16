@@ -7,7 +7,7 @@ export const Container = styled.ScrollView`
 `;
 
 export const SearchInput = styled.TextInput`
-  width: 80%;
+  width: 77%;
   background: #6b6970;
   border-radius: 8px;
   /* margin-top: 20px; */
@@ -27,7 +27,7 @@ export const WrapperSearch = styled.View`
 
 export const ButtonSearch = styled.TouchableOpacity`
   background: #ff9000;
-  width: 70px;
+  width: 20%;
   height: 50px;
   border-radius: 8px;
   align-items: center;
