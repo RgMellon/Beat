@@ -67,6 +67,6 @@ O projeto foi feito utilizando das seguines tecnologias
 
 ## 🤳 Download do apk
 
-> [Download APK](https://drive.google.com/file/d/1uFin5Hu7VT8I6IHzTwDE5FigoXAM7W4V/view?usp=sharing)
+> [Download APK](https://drive.google.com/file/d/1akKaiMDsmZ6Kv-SHd-8R5Km4GTk0bhS4/view?usp=sharing)
 
 Desenvolvido com ♥ por Renan Melo
